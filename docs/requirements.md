@@ -47,10 +47,11 @@ TODO: create a list of functional requirements.
     Give each functional requirement a unique ID. e.g. FR1, FR2, ...
     Indicate which UC the requirement comes from.
     
-* FR1: The system shall provide a menu of available options
-* FR2: The system shall request permission to access user location
-* FR3: The system shall get nearest public bike pumps from database
-* FR4: The system shall show a table of the nearest bike pumps
+* FR1: The system must provide a menu of available options (from UC1)
+* FR2: The system must request permission to access user location (from UC1)
+* FR3: The system must get nearest public bike pumps from database (from UC1)
+* FR4: The system must show a table of the nearest bike pumps (from UC1)
+* FR5: The system could request a post-code from the user to determine their location (from UC1)
 
 <dl><dt>FR1:</dt><dd>The system shall provide a menu of available options</dd>
     <dt>FR2:</dt><dd>The system shall request permission to access user location</dd>
