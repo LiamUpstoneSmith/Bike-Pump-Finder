@@ -19,7 +19,7 @@ TODO: Describe each use case (one per team member).
 | **Description** | As a cyclist I want to find my nearest public bike pump. |
 | **Actors** | cyclist |
 | **Assumptions** | Browser supports geo-location |
-| **Steps** | <ol><li>Opt to view table of bike pumps</li><li>Give permission for geo-location</li><li>View table of nearest bike pumps</li></ol> |
+| **Steps** | <ol><li>Opt to view table of bike pumps</li><li>Request permission to access user location</li><li>Give permission for geo-location</li><li>Get nearest public bike pumps from database</li><li>View table of nearest bike pumps</li></ol> |
 | **Variations** | Browser doesn't support geo-location |
 | **Non-functional** | TODO: OPTIONAL - List of non-functional requirements that the use case must meet. |
 | **Issues** | TODO: OPTIONAL - List of issues that remain to be resolved |
