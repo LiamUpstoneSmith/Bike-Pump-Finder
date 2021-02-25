@@ -19,7 +19,9 @@ TODO: Describe each use case (one per team member).
 | **Description** | As a cyclist I want to find my nearest public bike pump. |
 | **Actors** | cyclist |
 | **Assumptions** | Browser supports geo-location |
-| **Steps** | TODO: Interactions between actors and system necessary to achieve goal |
+| **Steps** | 
+1. foo
+2. bar |
 | **Variations** | Browser doesn't support geo-location |
 | **Non-functional** | TODO: OPTIONAL - List of non-functional requirements that the use case must meet. |
 | **Issues** | TODO: OPTIONAL - List of issues that remain to be resolved |
