@@ -14,13 +14,13 @@ TODO: Describe each use case (one per team member).
     Give each use case a unique ID, e.g. UC1, UC2, ...
     Summarise these using the use-case template below.
 
-| TODO: USE-CASE ID e.g. UC1, UC2, ... | TODO: USE-CASE NAME | 
-| -------------------------------------- | ------------------- |
-| **Description** | TODO: Goal to be achieved by use case and sources for requirement |
-| **Actors** | TODO: List of actors involved in use case |
-| **Assumptions** | TODO: Pre/post-conditions if any</td></tr>
+| USE-CASE | UC1: Find nearest public bike pump | 
+| -------- | ---------------------------------- |
+| **Description** | As a cyclist I want to find my nearest public bike pump. |
+| **Actors** | cyclist |
+| **Assumptions** | Browser supports geo-location |
 | **Steps** | TODO: Interactions between actors and system necessary to achieve goal |
-| **Variations** | TODO: OPTIONAL - Any variations in the steps of a use case |
+| **Variations** | Browser doesn't support geo-location |
 | **Non-functional** | TODO: OPTIONAL - List of non-functional requirements that the use case must meet. |
 | **Issues** | TODO: OPTIONAL - List of issues that remain to be resolved |
 
