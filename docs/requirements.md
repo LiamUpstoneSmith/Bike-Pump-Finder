@@ -49,9 +49,10 @@ TODO: create a list of functional requirements.
     
 * FR1: The system must provide a menu of available options (from UC1)
 * FR2: The system must request permission to access user location (from UC1)
-* FR3: The system must get nearest public bike pumps from database (from UC1)
-* FR4: The system must show a table of the nearest bike pumps (from UC1)
-* FR5: The system could request a post-code from the user to determine their location (from UC1)
+* FR3: The system must get the user location from the geolocation object (from UC1)
+* FR4: The system must get nearest public bike pumps from database (from UC1)
+* FR5: The system must show a table of the nearest bike pumps (from UC1)
+* FR6: The system could request a post-code from the user to determine their location (from UC1)
 
 <dl><dt>FR1:</dt><dd>The system shall provide a menu of available options</dd>
     <dt>FR2:</dt><dd>The system shall request permission to access user location</dd>
