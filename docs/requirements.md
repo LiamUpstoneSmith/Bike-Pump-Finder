@@ -46,6 +46,14 @@ TODO: create a list of functional requirements.
     e.g. "The system shall ..."
     Give each functional requirement a unique ID. e.g. FR1, FR2, ...
     Indicate which UC the requirement comes from.
+    
+* FR1: The system shall provide a menu of available options
+* FR2: The system shall request permission to access user location
+* FR3: The system shall get nearest public bike pumps from database
+* FR4: The system shall show a table of the nearest bike pumps
+
+
+
 
 
 ### Non-Functional Requirements
