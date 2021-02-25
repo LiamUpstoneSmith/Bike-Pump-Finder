@@ -52,8 +52,11 @@ TODO: create a list of functional requirements.
 * FR3: The system shall get nearest public bike pumps from database
 * FR4: The system shall show a table of the nearest bike pumps
 
-
-
+<dl><dt>FR1:</dt><dd>The system shall provide a menu of available options</dd>
+    <dt>FR2:</dt><dd>The system shall request permission to access user location</dd>
+    <dt>FR3:</dt><dd>The system shall get nearest public bike pumps from database</dd>
+    <dt>FR4:</dt><dd>The system shall show a table of the nearest bike pumps</dd>
+</dl>
 
 
 ### Non-Functional Requirements
