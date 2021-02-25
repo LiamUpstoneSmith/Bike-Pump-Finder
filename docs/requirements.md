@@ -20,8 +20,7 @@ TODO: Describe each use case (one per team member).
 | **Actors** | cyclist |
 | **Assumptions** | Browser supports geo-location |
 | **Steps** | 
-1. foo
-2. bar |
+<ol><li>foo</li><li>bar</li></ol> |
 | **Variations** | Browser doesn't support geo-location |
 | **Non-functional** | TODO: OPTIONAL - List of non-functional requirements that the use case must meet. |
 | **Issues** | TODO: OPTIONAL - List of issues that remain to be resolved |
