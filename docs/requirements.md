@@ -66,3 +66,9 @@ TODO: Consider one or more [quality attributes](https://en.wikipedia.org/wiki/IS
 Give each non-functional requirement a unique ID. e.g. NFR1, NFR2, ...
 
 Indicate which UC the requirement comes from.
+
+* NFR1: It should display up to 10 of the nearest bike pumps on one page (usability) (UC1)
+* NFR2: It must assume a sensible default on a browser with no user geolocation (reliability) (UC2)
+* NFR3: The listed bike pumps should be no further than 1 mile from the cyclist (usability) (UC1,UC2)
+* NFR4: The App should work on Android (Portability)
+
