@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <%# the < % - is raw output, to avoid escaping HTML %> 
+  <%- include("templates/head.ejs"); %>
+  <body>
+    <div class="grid-container">
+      <%- include("templates/header.ejs"); %>
+      <%- include("templates/nav.ejs"); %>
+      <main>
+        <div class="w3-bar w3-green">
+          <button class="w3-bar-item w3-button w3-ripple"
+          onclick="location.href='index.html?type=Bike Tool Station';">Bike Tool Station</button>
+          <button class="w3-bar-item w3-button w3-ripple"
+          onclick="location.href='index.html?type=On street bike pump';">On street bike pump</button>
+          <button class="w3-bar-item w3-button w3-ripple"
+          onclick="location.href='index.html?type=Bike Pump %26 Tool Station';">Bike Pump &amp; Tool Station</button>
+        </div>
+        <table class="w3-table w3-striped w3-border"><body>
+          <tr><th>Type</th><th>Name</th><th>Maintained by</th></tr>
+          <% for (var i=0; i<rows.length; i++) { %>
+          <tr>
+            <td><%= rows[i].Type %></td>
+            <td><%= rows[i].Name %></td>
+            <td><%= rows[i]['Maintained by'] %></td>
+          </tr>
+          <% } %>
+      </body></table>
+      </main>
+    </div>
+  </body>
+</html>

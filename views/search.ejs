@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <%- include("templates/head.ejs"); %>
+  <body>
+    <div class="grid-container">
+      <%- include("templates/header.ejs"); %>
+      <%- include("templates/nav.ejs"); %>
+      <main>
+        <!-- request.query.search -->
+        <table class="w3-table w3-striped w3-border"><body>
+          <tr><th>Type</th><th>Name</th><th>Maintained by</th></tr>
+          <% for (var i=0; i<rows.length; i++) { %>
+          <tr>
+            <td><%= rows[i].Type %></td>
+            <td><%= rows[i].Name %></td>
+            <td><%= rows[i]['Maintained by'] %></td>
+          </tr>
+          <% } %>
+      </body></table>
+      </main>
+    </div>
+  </body>
+</html>
+

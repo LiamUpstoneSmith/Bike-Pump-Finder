@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <%- include("templates/head.ejs"); %>
+  <body>
+    <div class="grid-container">
+      <%- include("templates/header.ejs"); %>
+      <%- include("templates/nav.ejs"); %>
+      <main>
+        <!-- iframe from Open Data Bristol -->
+        <iframe src="https://opendata.bristol.gov.uk/explore/embed/dataset/public-bike-pumps/map/?location=12,<%= lat %>,<%= lon %>&basemap=jawg.streets&static=false&datasetcard=false&scrollWheelZoom=false" 
+        width="500" height="300" frameborder="0"></iframe>
+      </main>
+    </div>
+  </body>
+</html>
+
+

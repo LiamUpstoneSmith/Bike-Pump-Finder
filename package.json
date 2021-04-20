@@ -1,22 +1,16 @@
 {
-  "name": "bike-pump-finder",
+  "name": "isd-express-prototype",
   "version": "1.0.0",
-  "description": "This App allows cylists to find nearby public bike-pumps and tools while they are on the road.  It uses Public [Bike Pump Data](https://opendata.bristol.gov.uk/explore/dataset/public-bike-pumps/information/)  from [Open Data Bristol](https://opendata.bristol.gov.uk).",
-  "main": "main.js",
-  "directories": {
-    "doc": "docs"
-  },
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sa-battle/Bike-Pump-Finder.git"
-  },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/sa-battle/Bike-Pump-Finder/issues"
-  },
-  "homepage": "https://github.com/sa-battle/Bike-Pump-Finder#readme"
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  }
 }
