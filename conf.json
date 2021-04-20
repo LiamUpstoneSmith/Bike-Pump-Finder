@@ -1,9 +1,0 @@
-{
-    "db": {
-        "host": "localhost",
-        "user": "Steve",
-        "password": "d@7@6@53",
-        "database": "isd"
-    },
-    "port": 8080
-}
