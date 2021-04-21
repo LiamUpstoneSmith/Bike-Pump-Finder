@@ -19,14 +19,14 @@ app.use(express.static('static'));
 // callback function for the splash page request handler
 function splash(request, response) {
     // if no type is specified use QUERY1
-    if (typeof request.query.type == 'undefined') { 
+    if (typeof request.query.type == 'undefined') {
         connection.query(QUERY1, function (err, rows, fields) {
             if (err) {
                 response.status(500);
                 response.send(err);
             }
-            response.render("index", { 'rows': rows, "type":"" });
-        });        
+            response.render("index", { 'rows': rows });
+        });
     }
     else { // QUERY2 selects matching type
         connection.query(QUERY2, [request.query.type], function (err, rows, fields) {
@@ -34,7 +34,7 @@ function splash(request, response) {
                 response.status(500);
                 response.send(err);
             }
-            response.render("index", { 'rows': rows, "type":request.query.type });
+            response.render("index", { 'rows': rows, "type": request.query.type });
         });
     }
 }
@@ -45,19 +45,32 @@ app.get("/index.html", splash);
 
 app.get("/map.html", function (request, response) {
     //var lat = request.query.lat, lon = request.query.lon;
-    connection.query(QUERY2, [request.query.type], function (err, rows, fields) {
-        if (err) {
-            response.status(500);
-            response.send(err);
-        }
-        else {
-            response.render("map", { 'rows': rows, "type":request.query.type });
-        }
-    });
+    if (typeof request.query.type == 'undefined') {
+        connection.query(QUERY1, function (err, rows, fields) {
+            if (err) {
+                response.status(500);
+                response.send(err);
+            }
+            else {
+                response.render("map", { 'rows': rows });
+            }
+        });
+    }
+    else {
+        connection.query(QUERY2, [request.query.type], function (err, rows, fields) {
+            if (err) {
+                response.status(500);
+                response.send(err);
+            }
+            else {
+                response.render("map", { 'rows': rows, "type": request.query.type });
+            }
+        });
+    }
 });
 
 app.get("/search.html", function (request, response) {
-    connection.query(QUERY3, ["%"+request.query.search+"%"], function (err, rows, fields) {
+    connection.query(QUERY3, ["%" + request.query.search + "%"], function (err, rows, fields) {
         if (err) {
             response.status(500);
             response.send(err);

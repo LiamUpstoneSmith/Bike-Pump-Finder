@@ -1,8 +1,18 @@
 <nav>
     <!--button onclick="getLocation(loadMap);" 
      class="w3-button w3-block w3-blue w3-border w3-border-white">Find nearest</button-->
+     <% if (typeof type == 'undefined') { %>
+
+     <button onclick="location.href='map.html'"
+     class="w3-button w3-block w3-blue w3-border w3-border-white">Find on map</button>
+
+     <% } else { %>
+
      <button onclick="location.href='map.html?type=<%= encodeURIComponent(type) %>'" 
      class="w3-button w3-block w3-blue w3-border w3-border-white">Find on map</button>
+
+     <% } %>
+     
     <button onclick="location.href='index.html';" 
      class="w3-button w3-block w3-blue w3-border w3-border-white">Find by type</button>         
 </nav>
