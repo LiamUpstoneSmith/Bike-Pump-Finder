@@ -25,7 +25,7 @@ function splash(request, response) {
                 response.status(500);
                 response.send(err);
             }
-            response.render("index", { 'rows': rows });
+            response.render("index", { 'rows': rows, "type":"" });
         });        
     }
     else { // QUERY2 selects matching type
@@ -34,7 +34,7 @@ function splash(request, response) {
                 response.status(500);
                 response.send(err);
             }
-            response.render("index", { 'rows': rows });
+            response.render("index", { 'rows': rows, "type":request.query.type });
         });
     }
 }
@@ -44,7 +44,16 @@ app.get("/", splash);
 app.get("/index.html", splash);
 
 app.get("/map.html", function (request, response) {
-    response.render("map", request.query);
+    //var lat = request.query.lat, lon = request.query.lon;
+    connection.query(QUERY2, [request.query.type], function (err, rows, fields) {
+        if (err) {
+            response.status(500);
+            response.send(err);
+        }
+        else {
+            response.render("map", { 'rows': rows, "type":request.query.type });
+        }
+    });
 });
 
 app.get("/search.html", function (request, response) {

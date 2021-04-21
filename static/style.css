@@ -26,3 +26,5 @@ main {
 footer {
   grid-area: pf;
 }
+
+#mapid { height: 500px; }

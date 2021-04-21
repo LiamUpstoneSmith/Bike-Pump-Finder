@@ -1,17 +1,38 @@
 <!DOCTYPE html>
 <html>
-  <%- include("templates/head.ejs"); %>
+<%- include("templates/head.ejs"); %>
+
   <body>
     <div class="grid-container">
       <%- include("templates/header.ejs"); %>
-      <%- include("templates/nav.ejs"); %>
-      <main>
-        <!-- iframe from Open Data Bristol -->
-        <iframe src="https://opendata.bristol.gov.uk/explore/embed/dataset/public-bike-pumps/map/?location=12,<%= lat %>,<%= lon %>&basemap=jawg.streets&static=false&datasetcard=false&scrollWheelZoom=false" 
-        width="500" height="300" frameborder="0"></iframe>
-      </main>
+        <%- include("templates/nav.ejs"); %>
+          <main>
+            <div id="mapid"></div>
+            <script>
+              const MAP_ZOOM = 16;
+
+              // initialise map. See https://leafletjs.com
+              // set the map size in CSS
+              var map = L.map('mapid');
+              //var lat=51.454514;
+              //var lon= -2.587910;
+              //map.setView([< %= lat %>, < %= lon %>], MAP_ZOOM);
+              map.setView([51.454514, -2.587910], MAP_ZOOM);
+              L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              }).addTo(map);
+
+              var marker;
+              <% for (var i = 0; i < rows.length; i++) { %>
+
+                marker = L.marker([<%= rows[i].geo_point_2d %> ]);
+                marker.addTo(map);
+                marker.bindPopup("<%= rows[i]['Name'] %>");
+              
+              <% } %>
+            </script>
+          </main>
     </div>
   </body>
+
 </html>
-
-
