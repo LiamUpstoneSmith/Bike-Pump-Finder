@@ -16,8 +16,8 @@
               var map = L.map('mapid');
               //var lat=51.454514;
               //var lon= -2.587910;
-              //map.setView([< %= lat %>, < %= lon %>], MAP_ZOOM);
-              map.setView([51.454514, -2.587910], MAP_ZOOM);
+              map.setView([<%= lat %>, <%= lon %>], MAP_ZOOM);
+              //map.setView([51.454514, -2.587910], MAP_ZOOM);
               L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               }).addTo(map);

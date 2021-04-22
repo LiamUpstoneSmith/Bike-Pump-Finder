@@ -3,6 +3,7 @@
 const express = require('express');
 const mysql = require('mysql');
 const conf = require('./conf.json');
+process.env.Node_ENV = process.env.NODE_ENV || 'dev';
 
 const QUERY1 = "SELECT * FROM `public-bike-pumps`";
 const QUERY2 = "SELECT * FROM `public-bike-pumps` Where Type = ?";
@@ -44,7 +45,7 @@ app.get("/", splash);
 app.get("/index.html", splash);
 
 app.get("/map.html", function (request, response) {
-    //var lat = request.query.lat, lon = request.query.lon;
+    var lat = request.query.lat, lon = request.query.lon;
     if (typeof request.query.type == 'undefined') {
         connection.query(QUERY1, function (err, rows, fields) {
             if (err) {
@@ -52,7 +53,7 @@ app.get("/map.html", function (request, response) {
                 response.send(err);
             }
             else {
-                response.render("map", { 'rows': rows });
+                response.render("map", { 'rows': rows, 'lat':lat, 'lon':lon });
             }
         });
     }
@@ -63,7 +64,7 @@ app.get("/map.html", function (request, response) {
                 response.send(err);
             }
             else {
-                response.render("map", { 'rows': rows, "type": request.query.type });
+                response.render("map", { 'rows': rows, "type": request.query.type, 'lat':lat, 'lon':lon });
             }
         });
     }
@@ -79,7 +80,7 @@ app.get("/search.html", function (request, response) {
     });
 });
 
-var connection = mysql.createConnection(conf.db);
+var connection = mysql.createConnection(conf[process.env.NODE_ENV].db);
 
 connection.connect(function (err) {
     if (err) {
@@ -89,5 +90,5 @@ connection.connect(function (err) {
     }
 });
 
-app.listen(conf.port);
-console.log("Listening on port %s", conf.port);
+app.listen(conf[process.env.NODE_ENV].port);
+console.log("Listening on port %s", conf[process.env.NODE_ENV].port);
