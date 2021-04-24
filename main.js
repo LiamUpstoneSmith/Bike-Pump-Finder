@@ -3,7 +3,7 @@
 const express = require('express');
 const mysql = require('mysql');
 const conf = require('./conf.json');
-process.env.Node_ENV = process.env.NODE_ENV || 'dev';
+process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
 const QUERY1 = "SELECT * FROM `public-bike-pumps`";
 const QUERY2 = "SELECT * FROM `public-bike-pumps` Where Type = ?";
