@@ -26,7 +26,7 @@ function splash(request, response) {
                 response.status(500);
                 response.send(err);
             }
-            response.render("index", { 'rows': rows });
+            else response.render("index", { 'rows': rows });
         });
     }
     else { // QUERY2 selects matching type
@@ -35,7 +35,7 @@ function splash(request, response) {
                 response.status(500);
                 response.send(err);
             }
-            response.render("index", { 'rows': rows, "type": request.query.type });
+            else response.render("index", { 'rows': rows, "type": request.query.type });
         });
     }
 }
@@ -52,9 +52,7 @@ app.get("/map.html", function (request, response) {
                 response.status(500);
                 response.send(err);
             }
-            else {
-                response.render("map", { 'rows': rows, 'lat':lat, 'lon':lon });
-            }
+            else response.render("map", { 'rows': rows, 'lat':lat, 'lon':lon });
         });
     }
     else {
@@ -63,9 +61,7 @@ app.get("/map.html", function (request, response) {
                 response.status(500);
                 response.send(err);
             }
-            else {
-                response.render("map", { 'rows': rows, "type": request.query.type, 'lat':lat, 'lon':lon });
-            }
+            else response.render("map", { 'rows': rows, "type": request.query.type, 'lat':lat, 'lon':lon });
         });
     }
 });
@@ -76,7 +72,7 @@ app.get("/search.html", function (request, response) {
             response.status(500);
             response.send(err);
         }
-        response.render("search", { 'rows': rows });
+        else response.render("search", { 'rows': rows });
     });
 });
 
@@ -90,5 +86,12 @@ connection.connect(function (err) {
     }
 });
 
-app.listen(conf[process.env.NODE_ENV].port);
-console.log("Listening on port %s", conf[process.env.NODE_ENV].port);
+if (process.env.NODE_ENV!='test') {
+    app.listen(conf[process.env.NODE_ENV].port);
+    console.log("Listening on port %s", conf[process.env.NODE_ENV].port);
+}
+
+// export for testing
+exports.app = app;
+exports.connection = connection;
+exports.splash = splash;
