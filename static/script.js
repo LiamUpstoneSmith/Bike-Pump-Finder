@@ -1,7 +1,8 @@
 // Request user geolocation and callback with lat, lon
 function getLocation(fun,type) {
     var is_safari = navigator.userAgent.toLowerCase().indexOf('safari/') > -1;
-    if (navigator.geolocation && !is_safari) {
+    var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome/') > -1;
+    if (navigator.geolocation && (!is_safari || is_chrome)) {
         navigator.geolocation.getCurrentPosition(function(loc) {
         fun(loc.coords.latitude, loc.coords.longitude,type);
         })
