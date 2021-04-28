@@ -24,7 +24,7 @@ var connection = mysql.createConnection(conf[process.env.NODE_ENV].db);
     connection.end();
 }); */
 
-connection.end();
+//connection.end();
 
 /* new Promise(function(resolve, reject) {
     connection.ping(function(err) {
@@ -54,3 +54,7 @@ async function pong() {
 }
 
 pong();
+
+var name = 'World';
+console.log(`Hello, ${name}!`);
+console.log `Hello, ${name}!` ;

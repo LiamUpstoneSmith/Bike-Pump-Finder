@@ -8,10 +8,8 @@
         <%- include("templates/nav.ejs"); %>
           <main>
             <div id="mapid"></div>
-            <input id="markerCount">
             <script>
               const MAP_ZOOM = 16;
-              var markerCount = 0;
 
               // initialise map. See https://leafletjs.com
               // set the map size in CSS
@@ -30,12 +28,11 @@
                 marker = L.marker([<%= rows[i].geo_point_2d %> ]);
                 marker.addTo(map);
                 marker.bindPopup("<%= rows[i]['Name'] %>");
-                markerCount++;
               
               <% } %>
 
-              document.getElementById("markerCount").value = markerCount;
             </script>
+            <input type="hidden" id="markerCount" value="<%= rows.length %>">
           </main>
     </div>
   </body>
