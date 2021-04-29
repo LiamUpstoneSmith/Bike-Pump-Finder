@@ -2,8 +2,12 @@
 
 const express = require('express');
 const mysql = require('mysql');
-const conf = require('./conf.json');
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
+
+var conf;
+if (process.env.NODE_ENV!='test') {
+    conf = require('./conf.json');
+}
 
 const QUERY1 = "SELECT * FROM `public-bike-pumps`";
 const QUERY2 = "SELECT * FROM `public-bike-pumps` Where Type = ?";
