@@ -1,9 +1,10 @@
 const assert = require('assert');
+const { stub } = require('sinon');
 const sinon = require('sinon');
 process.env.NODE_ENV = 'test';
 const main = require('../main');
 
-describe("UC2: Find public bike pump by type", function() {
+describe("UC2: Find public bike pump by type (database success cases)", function() {
 
     it("should pass this test", function() {
         var s = "Hello, World!";
@@ -14,41 +15,41 @@ describe("UC2: Find public bike pump by type", function() {
         assert.strictEqual(main.app.get('view engine'),"ejs");
     });
 
-    it("should connect to the database", function(done) {
-        main.connection.ping(function(err) {
-            assert.strictEqual(err,null);
-            done();
+    it("should call render with type", function() {
+        // stubbed connection.query() simulates a database success and is synchronous
+        var qstub = sinon.stub(main.connection, "query").callsFake(function(query,args,fn) {
+            fn(null,[ { Type:'T', Name:'N', 'Maintained by':'M' } ],null);
         });
-    });
-
-    it("should call render with type", function(done) {
         var request = { query: { type: 'TYPE' }};
         var response = { 
-            render(ejs, data) {
-                assert.strictEqual(data.type,'TYPE');
-                done();
-            }
+            render(ejs, data) { assert.strictEqual(data.type,'TYPE'); }
         }
         main.splash(request, response);
+        qstub.restore();
     });
 
-    it("should call render without type", function(done) {
+    it("should call render without type", function() {
+        // stubbed connection.query() simulates a database success and is synchronous
+        var qstub = sinon.stub(main.connection, "query").callsFake(function(query,fn) {
+            fn(null,[ { Type:'T', Name:'N', 'Maintained by':'M' } ],null);
+        });
         var request = { query: {}};
         var response = { render(ejs, data) {} };
         var spy = sinon.spy(response,'render');
         main.splash(request, response);
-        main.connection.ping(function(err) {
-            sinon.assert.called(spy);
-            done();
-        });
+        sinon.assert.called(spy);
+        qstub.restore();
     });
 
-    it("should respond with 500 internal server error, with type", function(done) {
-        // stub simulates a database error
-        var stub = sinon.stub(main.connection, "query").callsFake(function(query,args,fn) {
+});
+
+describe("UC2: Find public bike pump by type (database error cases)", function() {
+
+    it("should respond with 500 internal server error, with type", function() {
+        // stubbed connection.query() simulates a database error and is synchronous
+        var qstub = sinon.stub(main.connection, "query").callsFake(function(query,args,fn) {
             fn('ERROR',null,null);
         });
-        
         var request = { query: { type: 'TYPE' }};
         var response = { 
             status(code) { assert.strictEqual(code,500); },
@@ -60,20 +61,16 @@ describe("UC2: Find public bike pump by type", function() {
 
         main.splash(request, response);
 
-        main.connection.ping(function(err) {
-            sinon.assert.called(spy1);
-            sinon.assert.called(spy2);
-            stub.restore();
-            done();
-        });
+        sinon.assert.called(spy1);
+        sinon.assert.called(spy2);
+        qstub.restore();
     });
 
-    it("should respond with 500 internal server error, without type", function(done) {
-        // stub simulates a database error
-        var stub = sinon.stub(main.connection, "query").callsFake(function(query,fn) {
+    it("should respond with 500 internal server error, without type", function() {
+        // stubbed connection.query() simulates a database error and is synchronous
+        var qstub = sinon.stub(main.connection, "query").callsFake(function(query,fn) {
             fn('ERROR',null,null);
         });
-        
         var request = { query: {}};
         var response = { 
             status(code) { assert.strictEqual(code,500); },
@@ -85,19 +82,9 @@ describe("UC2: Find public bike pump by type", function() {
 
         main.splash(request, response);
         
-        main.connection.ping(function(err) {
-            sinon.assert.called(spy1);
-            sinon.assert.called(spy2);
-            stub.restore();
-            done();
-        });
+        sinon.assert.called(spy1);
+        sinon.assert.called(spy2);
+        qstub.restore();
     });
 
-    after(function(done) {
-        main.connection.end();
-        done();
-    });
 });
-
-
-

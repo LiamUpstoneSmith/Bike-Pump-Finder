@@ -76,20 +76,20 @@ app.get("/search.html", function (request, response) {
     });
 });
 
-var connection = mysql.createConnection(conf[process.env.NODE_ENV].db);
-
-connection.connect(function (err) {
-    if (err) {
-        console.error("Connection error: ", err.message);
-    } else {
-        console.log("Connected as: ", connection.threadId);
-    }
-});
-
+// It isn't ideal to have to make our code conditional upon the environment
 if (process.env.NODE_ENV!='test') {
+    var connection = mysql.createConnection(conf[process.env.NODE_ENV].db);
+    connection.connect(function (err) {
+        if (err) {
+            console.error("Connection error: ", err.message);
+        } else {
+            console.log("Connected as: ", connection.threadId);
+        }
+    });
+
     app.listen(conf[process.env.NODE_ENV].port);
     console.log("Listening on port %s", conf[process.env.NODE_ENV].port);
-}
+} else connection = { query(){} };
 
 // export for testing
 exports.app = app;
