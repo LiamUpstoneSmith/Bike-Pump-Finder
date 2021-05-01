@@ -21,24 +21,23 @@ app.set("view engine", "ejs");
 // serve static content from 'static' folder
 app.use(express.static('static'));
 
+function internalServerError(response, err) {
+    response.status(500);
+    response.send(err);    
+}
+
 // callback function for the splash page request handler
 function splash(request, response) {
     // if no type is specified use QUERY1
     if (typeof request.query.type == 'undefined') {
         connection.query(QUERY1, function (err, rows, fields) {
-            if (err) {
-                response.status(500);
-                response.send(err);
-            }
+            if (err) internalServerError(response, err);
             else response.render("index", { 'rows': rows });
         });
     }
     else { // QUERY2 selects matching type
         connection.query(QUERY2, [request.query.type], function (err, rows, fields) {
-            if (err) {
-                response.status(500);
-                response.send(err);
-            }
+            if (err) internalServerError(response, err);
             else response.render("index", { 'rows': rows, "type": request.query.type });
         });
     }
@@ -52,19 +51,13 @@ app.get("/map.html", function (request, response) {
     var lat = request.query.lat, lon = request.query.lon;
     if (typeof request.query.type == 'undefined') {
         connection.query(QUERY1, function (err, rows, fields) {
-            if (err) {
-                response.status(500);
-                response.send(err);
-            }
+            if (err) internalServerError(response, err);
             else response.render("map", { 'rows': rows, 'lat':lat, 'lon':lon });
         });
     }
     else {
         connection.query(QUERY2, [request.query.type], function (err, rows, fields) {
-            if (err) {
-                response.status(500);
-                response.send(err);
-            }
+            if (err) internalServerError(response, err)
             else response.render("map", { 'rows': rows, "type": request.query.type, 'lat':lat, 'lon':lon });
         });
     }
@@ -72,10 +65,7 @@ app.get("/map.html", function (request, response) {
 
 app.get("/search.html", function (request, response) {
     connection.query(QUERY3, ["%" + request.query.search + "%"], function (err, rows, fields) {
-        if (err) {
-            response.status(500);
-            response.send(err);
-        }
+        if (err) internalServerError(response, err)
         else response.render("search", { 'rows': rows });
     });
 });
@@ -99,3 +89,4 @@ if (process.env.NODE_ENV!='test') {
 exports.app = app;
 exports.connection = connection;
 exports.splash = splash;
+exports.internalServerError = internalServerError;

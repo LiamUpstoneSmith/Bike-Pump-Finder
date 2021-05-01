@@ -4,7 +4,7 @@ const sinon = require('sinon');
 process.env.NODE_ENV = 'test';
 const main = require('../main');
 
-describe("UC2: Find public bike pump by type (database success cases)", function() {
+describe("UC2: Find public bike pump by type", function() {
 
     it("should pass this test", function() {
         var s = "Hello, World!";
@@ -40,10 +40,6 @@ describe("UC2: Find public bike pump by type (database success cases)", function
         sinon.assert.called(spy);
         qstub.restore();
     });
-
-});
-
-describe("UC2: Find public bike pump by type (database error cases)", function() {
 
     it("should respond with 500 internal server error, with type", function() {
         // stubbed connection.query() simulates a database error and is synchronous
