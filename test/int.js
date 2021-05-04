@@ -14,7 +14,6 @@ describe("Integration tests", function() {
     });
 
     it("index OK", function(done) {
-        this.timeout(5000);
         unit
             .httpAgent(main.app)
             .get("/index.html")
