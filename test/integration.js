@@ -3,12 +3,12 @@ const sinon = require('sinon');
 process.env.NODE_ENV = 'test';
 const main = require('../main');
 
-describe("Integration tests", function() {
+describe("Integration tests (no query placeholders)", function() {
     var qstub;
-
     before(function() {
-        // stubbed connection.query() simulates a database success and is synchronous
-        qstub = sinon.stub(main.connection, "query").callsFake(function(query,fn) {
+        // stubbed query() simulates database success and is synchronous
+        qstub = sinon.stub(main.connection, "query")
+        .callsFake(function(query,fn) {
             fn(null,[ { Type:'T', Name:'N', 'Maintained by':'M' } ],null);
         });
     });
@@ -23,5 +23,4 @@ describe("Integration tests", function() {
     after(function() {
         qstub.restore();
     });
-
 });

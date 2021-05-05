@@ -5,9 +5,11 @@ const mysql = require('mysql');
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
 var conf;
-if (process.env.NODE_ENV!='test') {
-    conf = require('./conf.json');
-}
+if (process.env.NODE_ENV!='test') conf = require('./conf.json');
+else conf = { 'test':{ port:null, db:null } }; // dummy
+
+process.env.PORT = process.env.PORT || conf[process.env.NODE_ENV].port;
+var database = process.env.JAWSDB_MARIA_URL || conf[process.env.NODE_ENV].db;
 
 const QUERY1 = "SELECT * FROM `public-bike-pumps`";
 const QUERY2 = "SELECT * FROM `public-bike-pumps` Where Type = ?";
@@ -71,19 +73,16 @@ app.get("/search.html", function (request, response) {
 });
 
 // It isn't ideal to have to make our code conditional upon the environment
+var connection = { query(){} }; // stubbable dummy for testing
 if (process.env.NODE_ENV!='test') {
-    var connection = mysql.createConnection(conf[process.env.NODE_ENV].db);
+    connection = mysql.createConnection(database);
     connection.connect(function (err) {
-        if (err) {
-            console.error("Connection error: ", err.message);
-        } else {
-            console.log("Connected as: ", connection.threadId);
-        }
+        if (err) console.error("Connection error: ", err.message);
+        else console.log("Connected as: ", connection.threadId);
     });
-
-    app.listen(conf[process.env.NODE_ENV].port);
-    console.log("Listening on port %s", conf[process.env.NODE_ENV].port);
-} else connection = { query(){} };
+    app.listen(process.env.PORT);
+    console.log("Listening on port %s", process.env.PORT);
+}
 
 // export for testing
 exports.app = app;
