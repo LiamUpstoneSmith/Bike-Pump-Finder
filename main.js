@@ -5,8 +5,9 @@ const mysql = require('mysql');
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
 var conf;
-if (process.env.NODE_ENV!='test') conf = require('./conf.json');
-else conf = { 'test':{ port:null, db:null } }; // dummy
+if (process.env.NODE_ENV=='test' || process.env.NODE_ENV=='production') {
+    conf = { 'test':{ port:null, db:null } }; // dummy
+} else conf = require('./conf.json');
 
 process.env.PORT = process.env.PORT || conf[process.env.NODE_ENV].port;
 var database = process.env.JAWSDB_MARIA_URL || conf[process.env.NODE_ENV].db;
