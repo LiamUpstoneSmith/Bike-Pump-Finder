@@ -1,6 +1,7 @@
 # Deployment
 
 ## Release Notes
+This is version v1.0-alpha-0
 TODO: Describe the current version of the system (with version number. Include system dependencies ands software tools used.
 Are there any known issues? Provide the URL of the deployed system. 
 Describe the deployment of software components to hardware nodes using a UML Deployment diagram.
